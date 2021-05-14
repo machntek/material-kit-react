@@ -21,6 +21,9 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
     <AppBar
       elevation={0}
       {...rest}
+      sx={{
+        backgroundColor: '#151f6d'
+      }}
     >
       <Toolbar>
         <RouterLink to="/">

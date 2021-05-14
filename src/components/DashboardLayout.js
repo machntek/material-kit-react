@@ -5,8 +5,8 @@ import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
 
 const DashboardLayoutRoot = experimentalStyled('div')(
-  ({ theme }) => ({
-    backgroundColor: theme.palette.background.default,
+  () => ({
+    backgroundColor: '#151f6d',
     display: 'flex',
     height: '100%',
     overflow: 'hidden',

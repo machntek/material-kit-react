@@ -1,9 +1,9 @@
 import { Navigate } from 'react-router-dom';
 import DashboardLayout from 'src/components/DashboardLayout';
 import MainLayout from 'src/components/MainLayout';
-import Account from 'src/pages/Account';
-import CustomerList from 'src/pages/CustomerList';
-import Dashboard from 'src/pages/Dashboard';
+import Network from 'src/pages/Network';
+import BankIdHistoryList from 'src/pages/BankIdHistoryList';
+import FldHistoryList from 'src/pages/FldHistoryList';
 import Login from 'src/pages/Login';
 import NotFound from 'src/pages/NotFound';
 import ProductList from 'src/pages/ProductList';
@@ -15,9 +15,9 @@ const routes = [
     path: 'app',
     element: <DashboardLayout />,
     children: [
-      { path: 'account', element: <Account /> },
-      { path: 'customers', element: <CustomerList /> },
-      { path: 'dashboard', element: <Dashboard /> },
+      { path: 'network', element: <Network /> },
+      { path: 'history/bankid', element: <BankIdHistoryList /> },
+      { path: 'history/fld', element: <FldHistoryList /> },
       { path: 'products', element: <ProductList /> },
       { path: 'settings', element: <Settings /> },
       { path: '*', element: <Navigate to="/404" /> }
