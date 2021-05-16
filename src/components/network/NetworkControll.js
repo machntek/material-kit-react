@@ -5,8 +5,10 @@ import {
   Paper, Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles, experimentalStyled as styled } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
+import Stack from '@material-ui/core/Stack';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,39 +22,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AntSwitch = withStyles((theme) => ({
-  root: {
-    width: 28,
-    height: 16,
-    padding: 0,
-    display: 'flex',
+const AntSwitch = styled(Switch)(({ theme }) => ({
+  width: 28,
+  height: 16,
+  padding: 0,
+  display: 'flex',
+  '&:active': {
+    '& .MuiSwitch-thumb': {
+      width: 15,
+    },
+    '& .MuiSwitch-switchBase.Mui-checked': {
+      transform: 'translateX(9px)',
+    },
   },
-  switchBase: {
+  '& .MuiSwitch-switchBase': {
     padding: 2,
-    color: theme.palette.grey[500],
-    '&$checked': {
+    '&.Mui-checked': {
       transform: 'translateX(12px)',
-      color: theme.palette.common.white,
-      '& + $track': {
+      color: '#fff',
+      '& + .MuiSwitch-track': {
         opacity: 1,
-        backgroundColor: theme.palette.primary.main,
-        borderColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff',
       },
     },
   },
-  thumb: {
+  '& .MuiSwitch-thumb': {
+    boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
     width: 12,
     height: 12,
-    boxShadow: 'none',
+    borderRadius: 6,
+    transition: theme.transitions.create(['width'], {
+      duration: 200,
+    }),
   },
-  track: {
-    border: `1px solid ${theme.palette.grey[500]}`,
+  '& .MuiSwitch-track': {
     borderRadius: 16 / 2,
     opacity: 1,
-    backgroundColor: theme.palette.common.white,
+    backgroundColor:
+      theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)',
+    boxSizing: 'border-box',
   },
-  checked: {},
-}))(Switch);
+}));
 
 const NetworkControll = (props) => {
   const [state, setState] = React.useState({
@@ -149,15 +159,13 @@ const NetworkControll = (props) => {
             >
               재연결 시도 상태 :
             </Typography>
-            <Typography component="div">
-              <Grid component="label" container alignItems="center" spacing={1}>
-                <Grid item>Off</Grid>
-                <Grid item>
-                  <AntSwitch checked={state.reconnectChecked} onChange={handleChange} name="reconnectChecked" />
-                </Grid>
-                <Grid item>On</Grid>
-              </Grid>
-            </Typography>
+            <FormGroup>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Typography>Off</Typography>
+                <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />
+                <Typography>On</Typography>
+              </Stack>
+            </FormGroup>
           </Box>
         </Box>
       </CardContent>

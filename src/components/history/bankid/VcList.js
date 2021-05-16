@@ -4,7 +4,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box, Button,
   Card,
-  Checkbox, Container,
+  Checkbox,
   Table,
   TableBody,
   TableCell,
@@ -59,7 +59,7 @@ const VcUsingHistoryResults = ({ vcs, ...rest }) => {
   };
 
   return (
-    <Container>
+    <Box>
       <Box>
         <Typography
           color="textPrimary"
@@ -151,7 +151,7 @@ const VcUsingHistoryResults = ({ vcs, ...rest }) => {
           rowsPerPageOptions={[5, 10, 25]}
         />
       </Card>
-    </Container>
+    </Box>
   );
 };
 

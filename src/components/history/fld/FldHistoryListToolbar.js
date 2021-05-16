@@ -1,48 +1,131 @@
 import {
-  Box,
   Button,
-  Card,
-  CardContent,
   TextField,
   InputAdornment,
-  SvgIcon
+  SvgIcon, Typography, Box,
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
+import Stack from '@material-ui/core/Stack';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import DatePicker from '@material-ui/lab/DatePicker';
+import TimePicker from '@material-ui/lab/TimePicker';
+import React from 'react';
 
-const FldHistoryListToolbar = (props) => (
-  <Box {...props}>
-    <Box sx={{ mt: 3 }}>
-      <Card>
-        <CardContent>
-          <Box
+const FldHistoryListToolbar = () => {
+  const [value, setValue] = React.useState(null);
+  return (
+    <Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end'
+        }}
+      >
+        <Typography
+          color="textPrimary"
+          variant="h4"
+          sx={{
+            paddingRight: 1
+          }}
+        >
+          금결원 전문번호
+        </Typography>
+        <TextField
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SvgIcon
+                  fontSize="small"
+                  color="action"
+                >
+                  <SearchIcon />
+                </SvgIcon>
+              </InputAdornment>
+            )
+          }}
+          placeholder="금결원 전문번호"
+          variant="outlined"
+          size="small"
+        />
+      </Box>
+      <Stack
+        direction="row"
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          pt: 2
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end'
+          }}
+        >
+          <Typography
+            color="textPrimary"
+            variant="h4"
             sx={{
-              float: 'right'
+              paddingRight: 1
             }}
           >
-            <TextField
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SvgIcon
-                      fontSize="small"
-                      color="action"
-                    >
-                      <SearchIcon />
-                    </SvgIcon>
-                  </InputAdornment>
-                )
+            거래일시
+          </Typography>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue);
               }}
-              placeholder="Search customer"
-              variant="outlined"
+              renderInput={(params) => <TextField {...params} />}
             />
-            <Button variant="contained">
-              조회
-            </Button>
-          </Box>
-        </CardContent>
-      </Card>
+            <Box sx={{ width: 10 }} />
+            <TimePicker
+              ampm={false}
+              openTo="hours"
+              views={['hours', 'minutes', 'seconds']}
+              inputFormat="HH:mm:ss"
+              mask="__:__:__"
+              label="With seconds"
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+            <Typography
+              color="textPrimary"
+              variant="h4"
+              sx={{
+                paddingLeft: 1,
+                paddingRight: 1,
+                alignItems: 'center'
+              }}
+            >
+              ~
+            </Typography>
+            <TimePicker
+              ampm={false}
+              openTo="hours"
+              views={['hours', 'minutes', 'seconds']}
+              inputFormat="HH:mm:ss"
+              mask="__:__:__"
+              label="With seconds"
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </Box>
+        <Button variant="contained">
+          조회
+        </Button>
+      </Stack>
     </Box>
-  </Box>
-);
+  );
+};
 
 export default FldHistoryListToolbar;
