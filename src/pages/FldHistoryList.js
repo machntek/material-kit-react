@@ -25,7 +25,7 @@ const FldHistoryList = () => (
           전문처리현황 조회
         </Typography>
       </Container>
-      <Container maxWidth={false}>
+      <Container maxWidth="xl">
         <FldHistoryListToolbar />
         <Box sx={{ pt: 3 }}>
           <FldHistoryResults customers={fldhistory} />

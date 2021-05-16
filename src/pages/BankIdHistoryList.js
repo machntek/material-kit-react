@@ -30,19 +30,17 @@ const BankIdHistoryList = () => (
         </Typography>
       </Container>
       <Container
-        maxWidth={false}
+        maxWidth="xl"
         sx={{
-          alignItems: 'right',
           display: 'flex',
           flexDirection: 'row',
-          float: 'right'
         }}
       >
-        <Box sx={{ pt: 3, width: 600 }}>
+        <Box sx={{ pt: 3, width: '50%' }}>
           <BankIdHistoryListToolbar />
           <DidList dids={didHistory} />
         </Box>
-        <Box sx={{ pt: 3, width: 600 }}>
+        <Box sx={{ pt: 3, width: '50%' }}>
           <VcList vcs={vcIssuingHistory} />
         </Box>
       </Container>

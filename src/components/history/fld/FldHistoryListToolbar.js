@@ -14,9 +14,12 @@ const FldHistoryListToolbar = (props) => (
     <Box sx={{ mt: 3 }}>
       <Card>
         <CardContent>
-          <Box sx={{ maxWidth: 500 }}>
+          <Box
+            sx={{
+              float: 'right'
+            }}
+          >
             <TextField
-              fullWidth
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -31,15 +34,8 @@ const FldHistoryListToolbar = (props) => (
               }}
               placeholder="Search customer"
               variant="outlined"
-              sx={{
-                float: 'right',
-              }}
             />
-            <Button
-              sx={{
-                float: 'right',
-              }}
-            >
+            <Button variant="contained">
               조회
             </Button>
           </Box>

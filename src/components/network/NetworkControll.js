@@ -85,6 +85,7 @@ const NetworkControll = (props) => {
               variant="h4"
               paragraph="false"
               align="center"
+              sx={{ verticalAlign: 'middle' }}
             >
               lpfapxxd
             </Typography>

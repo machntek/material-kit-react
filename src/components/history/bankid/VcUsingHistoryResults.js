@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
@@ -9,7 +9,7 @@ import {
   TableCell,
   TableHead,
   TablePagination,
-  TableRow,
+  TableRow, Typography,
 } from '@material-ui/core';
 
 const VcUsingHistoryResults = ({ histories, ...rest }) => {
@@ -26,13 +26,19 @@ const VcUsingHistoryResults = ({ histories, ...rest }) => {
 
   return (
     <Container maxWidth="xl">
-      VC 이용내역 조회
       <Box
         sx={{
-          float: 'right',
+          display: 'flex',
+          flexDirection: 'row',
         }}
       >
-        <Button>
+        <Typography
+          color="textPrimary"
+          variant="h4"
+        >
+          VC이용내역 조회
+        </Typography>
+        <Button variant="contained">
           전체조회
         </Button>
       </Box>
