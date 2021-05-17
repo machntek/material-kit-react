@@ -60,26 +60,29 @@ const VcUsingHistoryResults = ({ vcs, ...rest }) => {
 
   return (
     <Container>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-        }}
-      >
+      <Box>
         <Typography
           color="textPrimary"
           variant="h4"
+          sx={{
+            float: 'left'
+          }}
         >
           VC조회
         </Typography>
-        <Button
-          variant="contained"
+        <Box
           sx={{
-            alignSelf: 'right'
+            display: 'flex',
+            justifyContent: 'flex-end'
           }}
         >
-          폐기
-        </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+          >
+            폐기
+          </Button>
+        </Box>
       </Box>
       <Card {...rest}>
         <PerfectScrollbar>

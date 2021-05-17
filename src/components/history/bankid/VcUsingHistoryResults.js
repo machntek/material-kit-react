@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
-  Box, Button,
+  Box,
   Card, Container,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TablePagination,
-  TableRow, Typography,
+  TableRow
 } from '@material-ui/core';
 
 const VcUsingHistoryResults = ({ histories, ...rest }) => {
@@ -26,22 +26,6 @@ const VcUsingHistoryResults = ({ histories, ...rest }) => {
 
   return (
     <Container maxWidth="xl">
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-        }}
-      >
-        <Typography
-          color="textPrimary"
-          variant="h4"
-        >
-          VC이용내역 조회
-        </Typography>
-        <Button variant="contained">
-          전체조회
-        </Button>
-      </Box>
       <Card {...rest}>
         <PerfectScrollbar>
           <Box sx={{ minWidth: 1050 }}>

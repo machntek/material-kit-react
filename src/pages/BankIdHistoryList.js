@@ -1,12 +1,13 @@
 import { Helmet } from 'react-helmet';
 import { Box, Container, Typography } from '@material-ui/core';
 import VcUsingHistoryResults from 'src/components/history/bankid/VcUsingHistoryResults';
-import BankIdHistoryListToolbar from 'src/components/history/bankid/BankIdHistoryListToolbar';
+import DidSearchToolbar from 'src/components/history/bankid/DidSearchToolbar';
 import vcUsingHistory from 'src/__mocks__/vcUsingHistory';
 import DidList from '../components/history/bankid/DidList';
 import didHistory from '../__mocks__/didHistory';
 import VcList from '../components/history/bankid/VcList';
 import vcIssuingHistory from '../__mocks__/vcIssuingHistory';
+import VcUseHistorySearchToolbar from '../components/history/bankid/VcUseHistorySearchToolbar';
 
 const BankIdHistoryList = () => (
   <>
@@ -37,7 +38,7 @@ const BankIdHistoryList = () => (
         }}
       >
         <Box sx={{ pt: 3, width: '50%' }}>
-          <BankIdHistoryListToolbar />
+          <DidSearchToolbar />
           <DidList dids={didHistory} />
         </Box>
         <Box sx={{ pt: 3, width: '50%' }}>
@@ -45,6 +46,7 @@ const BankIdHistoryList = () => (
         </Box>
       </Container>
       <Box sx={{ pt: 10 }}>
+        <VcUseHistorySearchToolbar />
         <VcUsingHistoryResults histories={vcUsingHistory} />
       </Box>
     </Box>
