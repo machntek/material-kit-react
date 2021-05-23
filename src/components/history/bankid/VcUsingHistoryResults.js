@@ -53,7 +53,7 @@ const VcUsingHistoryResults = ({ histories, ...rest }) => {
                 {histories.slice(0, limit).map((history) => (
                   <TableRow
                     hover
-                    key={history.did}
+                    key={[history.did, history.datetime]}
                   >
                     <TableCell>
                       {history.did}

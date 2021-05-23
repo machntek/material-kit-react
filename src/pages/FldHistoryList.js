@@ -28,7 +28,7 @@ const FldHistoryList = () => (
       <Container maxWidth="xl">
         <FldHistoryListToolbar />
         <Box sx={{ pt: 3 }}>
-          <FldHistoryResults customers={fldhistory} />
+          <FldHistoryResults customers={fldhistory.data} />
         </Box>
       </Container>
     </Box>

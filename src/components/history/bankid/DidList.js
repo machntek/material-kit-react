@@ -11,7 +11,7 @@ import {
   TableRow,
 } from '@material-ui/core';
 
-const VcUsingHistoryResults = ({ dids, ...rest }) => {
+const VcUsingHistoryResults = ({ dids, onClick, ...rest }) => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
@@ -42,6 +42,10 @@ const VcUsingHistoryResults = ({ dids, ...rest }) => {
               <TableRow
                 hover
                 key={did.did}
+                onClick={onClick}
+                sx={{
+                  cursor: 'pointer',
+                }}
               >
                 <TableCell>
                   {did.did}
@@ -68,7 +72,8 @@ const VcUsingHistoryResults = ({ dids, ...rest }) => {
 };
 
 VcUsingHistoryResults.propTypes = {
-  dids: PropTypes.array.isRequired
+  dids: PropTypes.array.isRequired,
+  onClick: PropTypes.func
 };
 
 export default VcUsingHistoryResults;
