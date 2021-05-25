@@ -1,5 +1,5 @@
 export default {
-  data: [
+  content: [
     {
       vcId: '12vcid34test',
       vcType: 'bankid',

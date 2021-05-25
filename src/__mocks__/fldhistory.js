@@ -1,5 +1,5 @@
 export default {
-  data: [
+  content: [
     {
       serialNo: 1000,
       datetime: '2021/05/05 05:05:05',

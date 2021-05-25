@@ -13,41 +13,17 @@ import {
   TableRow, Typography
 } from '@material-ui/core';
 
-const VcUsingHistoryResults = ({ vcs, ...rest }) => {
-  const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
+const VcUsingHistoryResults = ({ vcs, onSearch, ...rest }) => {
+  const [selectedCustomerIds, setSelectedCustomerIds] = useState();
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
-  const handleSelectAll = (event) => {
-    let newSelectedCustomerIds;
-
-    if (event.target.checked) {
-      newSelectedCustomerIds = vcs.map((customer) => customer.id);
+  const handleSelectOne = (vcId) => {
+    if (vcId === selectedCustomerIds) {
+      setSelectedCustomerIds(null);
     } else {
-      newSelectedCustomerIds = [];
+      setSelectedCustomerIds(vcId);
     }
-
-    setSelectedCustomerIds(newSelectedCustomerIds);
-  };
-
-  const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = [];
-
-    if (selectedIndex === -1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
-    } else if (selectedIndex === 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(1));
-    } else if (selectedIndex === selectedCustomerIds.length - 1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(0, selectedIndex),
-        selectedCustomerIds.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
   const handleLimitChange = (event) => {
@@ -90,17 +66,7 @@ const VcUsingHistoryResults = ({ vcs, ...rest }) => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedCustomerIds.length === vcs.length}
-                      color="primary"
-                      indeterminate={
-                        selectedCustomerIds.length > 0
-                        && selectedCustomerIds.length < vcs.length
-                      }
-                      onChange={handleSelectAll}
-                    />
-                  </TableCell>
+                  <TableCell padding="checkbox" />
                   <TableCell>
                     VC ID
                   </TableCell>
@@ -117,22 +83,22 @@ const VcUsingHistoryResults = ({ vcs, ...rest }) => {
                   <TableRow
                     hover
                     key={vc.id}
-                    selected={selectedCustomerIds.indexOf(vc.id) !== -1}
+                    selected={selectedCustomerIds === vc.vcId}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox
-                        checked={selectedCustomerIds.indexOf(vc.id) !== -1}
-                        onChange={(event) => handleSelectOne(event, vc.id)}
+                        checked={selectedCustomerIds === vc.vcId}
+                        onChange={() => handleSelectOne(vc.vcId)}
                         value="true"
                       />
                     </TableCell>
-                    <TableCell>
+                    <TableCell onClick={onSearch} sx={{ cursor: 'pointer' }}>
                       {vc.vcId}
                     </TableCell>
-                    <TableCell>
+                    <TableCell onClick={onSearch} sx={{ cursor: 'pointer' }}>
                       {vc.vcType}
                     </TableCell>
-                    <TableCell>
+                    <TableCell onClick={onSearch} sx={{ cursor: 'pointer' }}>
                       {vc.status}
                     </TableCell>
                   </TableRow>
@@ -156,7 +122,8 @@ const VcUsingHistoryResults = ({ vcs, ...rest }) => {
 };
 
 VcUsingHistoryResults.propTypes = {
-  vcs: PropTypes.array.isRequired
+  vcs: PropTypes.array.isRequired,
+  onSearch: PropTypes.func
 };
 
 export default VcUsingHistoryResults;

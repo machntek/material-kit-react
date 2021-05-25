@@ -1,5 +1,5 @@
 export default {
-  data: [
+  content: [
     {
       did: 'did:omn:1234',
       vcId: '12vcid34test',

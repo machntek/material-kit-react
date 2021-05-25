@@ -11,8 +11,9 @@ import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import DatePicker from '@material-ui/lab/DatePicker';
 import TimePicker from '@material-ui/lab/TimePicker';
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const FldHistoryListToolbar = () => {
+const FldHistoryListToolbar = ({ onSearch }) => {
   const [value, setValue] = React.useState(null);
   return (
     <Box>
@@ -120,12 +121,19 @@ const FldHistoryListToolbar = () => {
             />
           </LocalizationProvider>
         </Box>
-        <Button variant="contained">
+        <Button
+          variant="contained"
+          onClick={onSearch}
+        >
           조회
         </Button>
       </Stack>
     </Box>
   );
+};
+
+FldHistoryListToolbar.propTypes = {
+  onSearch: PropTypes.func
 };
 
 export default FldHistoryListToolbar;
