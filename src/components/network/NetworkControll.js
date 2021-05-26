@@ -4,7 +4,8 @@ import {
   CardContent, Grid,
   Paper, Typography,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles, experimentalStyled as styled } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -64,17 +65,21 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const NetworkControll = (props) => {
-  const [state, setState] = React.useState({
-    schedulingChecked: true,
-    reconnectChecked: true
+const NetworkControll = ({ activeSchedule, connected, retry }) => {
+  const [state, setState] = useState({
+    activeSchedule: true,
+    connected: true,
+    retry: true
   });
+  console.log(activeSchedule);
+  console.log(connected);
+  console.log(retry);
   const classes = useStyles();
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
   return (
-    <Card {...props}>
+    <Card>
       <CardContent
         sx={{
           backgroundColor: 'rgb(220, 230, 242)'
@@ -129,7 +134,7 @@ const NetworkControll = (props) => {
               <Grid component="label" container alignItems="center" spacing={1}>
                 <Grid item>Off</Grid>
                 <Grid item>
-                  <AntSwitch checked={state.schedulingChecked} onChange={handleChange} name="schedulingChecked" />
+                  <AntSwitch checked={state.activeSchedule} onChange={handleChange} name="activeSchedule" />
                 </Grid>
                 <Grid item>On</Grid>
               </Grid>
@@ -140,7 +145,8 @@ const NetworkControll = (props) => {
             gutterBottom
             variant="h4"
           >
-            연결 상태 : 연결
+            연결 상태 :
+            {state.connected === true ? '연결' : '중단'}
           </Typography>
           <Box
             sx={{
@@ -171,6 +177,12 @@ const NetworkControll = (props) => {
       </CardContent>
     </Card>
   );
+};
+
+NetworkControll.propTypes = {
+  activeSchedule: PropTypes.bool.isRequired,
+  connected: PropTypes.bool,
+  retry: PropTypes.bool
 };
 
 export default NetworkControll;

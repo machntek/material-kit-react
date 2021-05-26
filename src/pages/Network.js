@@ -4,28 +4,30 @@ import {
   Container,
   Grid, Typography
 } from '@material-ui/core';
+import axios from 'axios';
 import NetworkStatus from 'src/components/network/NetworkStatus';
 import NetworkControll from 'src/components/network/NetworkControll';
-import React, { useState } from 'react';
-import axios from 'axios';
 
 const Network = () => {
-  const [networkStatus, setNetworkStatus] = useState([{}, {}]);
+  const networkStatus = [{}, {}];
 
   const handleNetworkStatus = () => {
     networkStatus.forEach((value, index) => {
-      axios.get(`http://localhost:8081/did/admin/myinfo/fdid/health/${index}`)
+      axios.get(`http://localhost:8081/did/admin/myinfo/fdid/health/${index + 1}`)
         .then((Response) => {
-          console.log(Response);
-          setNetworkStatus({ ...networkStatus, value: [{}, {}] });
+          networkStatus[index] = Response.data;
         }).catch((Error) => {
           console.log(Error);
         });
     });
   };
-  const handleFuck = () => {
-    console.log(networkStatus);
-  };
+  handleNetworkStatus();
+  console.log(networkStatus);
+  console.log('aaa');
+  networkStatus.map((status) => console.log(status));
+  console.log('xyz');
+  console.log(networkStatus);
+  console.log('xxx');
 
   return (
     <>
@@ -44,7 +46,6 @@ const Network = () => {
             color="textPrimary"
             gutterBottom
             variant="h1"
-            onClick={handleNetworkStatus}
           >
             뱅크ID 서비스 관리
           </Typography>
@@ -56,7 +57,6 @@ const Network = () => {
               minHeight: '100%',
               py: 3
             }}
-            onClick={handleFuck}
           >
             <Grid
               item
@@ -67,38 +67,27 @@ const Network = () => {
               <NetworkStatus />
             </Grid>
           </Box>
-          <Box
-            sx={{
-              backgroundColor: 'background.default',
-              minHeight: '100%',
-              py: 3
-            }}
-          >
-            <Grid
-              item
-              lg={12}
-              md={6}
-              xs={12}
-            >
-              <NetworkControll hostname="lpfap01d" />
-            </Grid>
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: 'background.default',
-              minHeight: '100%',
-              py: 3
-            }}
-          >
-            <Grid
-              item
-              lg={12}
-              md={6}
-              xs={12}
-            >
-              <NetworkControll />
-            </Grid>
-          </Box>
+          {networkStatus.map((status) => {
+            console.log('000');
+            return (
+              <Box
+                sx={{
+                  backgroundColor: 'background.default',
+                  minHeight: '100%',
+                  py: 3
+                }}
+              >
+                <Grid
+                  item
+                  lg={12}
+                  md={6}
+                  xs={12}
+                >
+                  <NetworkControll networkStatus={status} />
+                </Grid>
+              </Box>
+            );
+          })}
         </Container>
       </Box>
     </>
