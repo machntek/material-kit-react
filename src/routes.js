@@ -6,7 +6,6 @@ import BankIdHistoryList from 'src/pages/BankIdHistoryList';
 import FldHistoryList from 'src/pages/FldHistoryList';
 import Login from 'src/pages/Login';
 import NotFound from 'src/pages/NotFound';
-import ProductList from 'src/pages/ProductList';
 import Register from 'src/pages/Register';
 import Settings from 'src/pages/Settings';
 
@@ -18,7 +17,6 @@ const routes = [
       { path: 'network', element: <Network /> },
       { path: 'history/bankid', element: <BankIdHistoryList /> },
       { path: 'history/fld', element: <FldHistoryList /> },
-      { path: 'products', element: <ProductList /> },
       { path: 'settings', element: <Settings /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]

@@ -1,16 +1,24 @@
 export default {
   content: [
     {
-      serialNo: 1000,
-      datetime: '2021/05/05 05:05:05',
-      kftcTrxNo: 1000,
-      sendDirection: '은행->금결원 요청'
+      sendDay: '20210520',
+      eaiSeq: 18,
+      fdidSeq: 1,
+      twayCd: 2,
+      timestamp: '20210520145501',
+      content0: 'abc',
+      content1: 'def',
+      content2: 'ghi'
     },
     {
-      serialNo: 2000,
-      datetime: '2021/05/05 05:05:05',
-      kftcTrxNo: 2000,
-      sendDirection: '은행->금결원 응답'
+      sendDay: '20210521',
+      eaiSeq: 18,
+      fdidSeq: 1,
+      twayCd: 2,
+      timestamp: '20210520145501',
+      content0: 'abc',
+      content1: 'def',
+      content2: 'ghi'
     }
   ]
 };

@@ -6,7 +6,7 @@ import FldHistoryListToolbar from '../components/history/fld/FldHistoryListToolb
 import FldHistoryResults from '../components/history/fld/FldHistoryResults';
 
 const FldHistoryList = () => {
-  const [histories, setHistories] = useState({
+  const [fldHistories, setFldHistories] = useState({
     content: []
   });
 
@@ -14,7 +14,7 @@ const FldHistoryList = () => {
     axios.get('http://localhost:8081/did/admin/myinfo/query/fld')
       .then((Response) => {
         console.log(Response);
-        setHistories({ ...histories, content: Response.data.content });
+        setFldHistories({ ...fldHistories, content: Response.data.content });
       }).catch((Error) => {
         console.log(Error);
       });
@@ -44,7 +44,7 @@ const FldHistoryList = () => {
         <Container maxWidth="xl">
           <FldHistoryListToolbar onSearch={searchFldHistories} />
           <Box sx={{ pt: 3 }}>
-            <FldHistoryResults customers={histories.content} />
+            <FldHistoryResults histories={fldHistories.content} />
           </Box>
         </Container>
       </Box>

@@ -13,7 +13,7 @@ import {
   Typography
 } from '@material-ui/core';
 
-const FldHistoryResults = ({ customers, ...rest }) => {
+const FldHistoryResults = ({ histories, ...rest }) => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
@@ -50,10 +50,9 @@ const FldHistoryResults = ({ customers, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {histories.slice(0, limit).map((history) => (
                 <TableRow
                   hover
-                  key={customer.id}
                 >
                   <TableCell>
                     <Box
@@ -66,18 +65,18 @@ const FldHistoryResults = ({ customers, ...rest }) => {
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.serialNo}
+                        {history.eaiSeq}
                       </Typography>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {customer.datetime}
+                    {history.timestamp}
                   </TableCell>
                   <TableCell>
-                    {customer.kftcTrxNo}
+                    {history.fdidSeq}
                   </TableCell>
                   <TableCell>
-                    {customer.sendDirection}
+                    {history.twayCd}
                   </TableCell>
                 </TableRow>
               ))}
@@ -87,7 +86,7 @@ const FldHistoryResults = ({ customers, ...rest }) => {
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={histories.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}
@@ -99,7 +98,7 @@ const FldHistoryResults = ({ customers, ...rest }) => {
 };
 
 FldHistoryResults.propTypes = {
-  customers: PropTypes.array.isRequired
+  histories: PropTypes.array.isRequired
 };
 
 export default FldHistoryResults;

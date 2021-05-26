@@ -16,12 +16,12 @@ const BankIdHistoryList = () => {
   const [vcs, setVcs] = useState({
     content: []
   });
-  const [vcHistory, setVcHistory] = useState({
+  const [vcHistories, setVcHistories] = useState({
     content: []
   });
   const searchDidByCusNo = (cusno) => {
     setVcs({ ...dids, content: [] });
-    setVcHistory({ ...vcHistory, content: [] });
+    setVcHistories({ ...vcHistories, content: [] });
 
     axios.get('http://localhost:8081/did/admin/myinfo/query/did', {
       params: {
@@ -46,7 +46,7 @@ const BankIdHistoryList = () => {
   const searchVcHistoryByVcId = () => {
     axios.get('http://localhost:8081/did/admin/myinfo/query/vc/history')
       .then((Response) => {
-        setVcHistory({ ...vcHistory, content: Response.data.content });
+        setVcHistories({ ...vcHistories, content: Response.data.content });
       }).catch((Error) => {
         console.log(Error);
       });
@@ -87,7 +87,7 @@ const BankIdHistoryList = () => {
         </Stack>
         <Box sx={{ pt: 10 }}>
           <VcUseHistorySearchToolbar />
-          <VcUsingHistoryResults histories={vcHistory.content} />
+          <VcUsingHistoryResults histories={vcHistories.content} />
         </Box>
       </Box>
     </>

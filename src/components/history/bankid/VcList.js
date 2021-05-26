@@ -96,10 +96,10 @@ const VcUsingHistoryResults = ({ vcs, onSearch, ...rest }) => {
                       {vc.vcId}
                     </TableCell>
                     <TableCell onClick={onSearch} sx={{ cursor: 'pointer' }}>
-                      {vc.vcType}
+                      {vc.vcTypeCode}
                     </TableCell>
                     <TableCell onClick={onSearch} sx={{ cursor: 'pointer' }}>
-                      {vc.status}
+                      {vc.vcStatus}
                     </TableCell>
                   </TableRow>
                 ))}

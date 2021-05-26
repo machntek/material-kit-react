@@ -51,7 +51,7 @@ const VcUsingHistoryResults = ({ dids, onSearch, ...rest }) => {
                   {did.did}
                 </TableCell>
                 <TableCell>
-                  {did.status}
+                  {did.didStatus}
                 </TableCell>
               </TableRow>
             ))}

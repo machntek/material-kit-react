@@ -62,13 +62,13 @@ const VcUsingHistoryResults = ({ histories, ...rest }) => {
                       {history.vcId}
                     </TableCell>
                     <TableCell>
-                      {history.vcType}
+                      {history.vcUseType}
                     </TableCell>
                     <TableCell>
-                      {history.vcUseGb}
+                      {history.vcUseService}
                     </TableCell>
                     <TableCell>
-                      {history.datetime}
+                      {history.timestamp}
                     </TableCell>
                   </TableRow>
                 ))}

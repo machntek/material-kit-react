@@ -1,9 +1,12 @@
 export default {
   content: [
     {
+      did: 'did:kftc:ssssss',
       vcId: '12vcid34test',
-      vcType: 'bankid',
-      status: 1
+      vcTypeCode: 'bankid',
+      vcStatus: 1,
+      vcEnrollmentDateTime: '20210520145501',
+      vcRevokeDateTime: null
     }
   ]
 };
