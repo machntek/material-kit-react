@@ -2,12 +2,12 @@ import { Helmet } from 'react-helmet';
 import { Box, Container, Typography } from '@material-ui/core';
 import Stack from '@material-ui/core/Stack';
 import { useState } from 'react';
-import axios from 'axios';
 import VcUsingHistoryResults from 'src/components/history/bankid/VcUsingHistoryResults';
 import DidSearchToolbar from 'src/components/history/bankid/DidSearchToolbar';
 import DidList from '../components/history/bankid/DidList';
 import VcList from '../components/history/bankid/VcList';
 import VcUseHistorySearchToolbar from '../components/history/bankid/VcUseHistorySearchToolbar';
+import axios from '../utils/axiosUtil';
 
 const BankIdHistoryList = () => {
   const [dids, setDids] = useState({
@@ -23,7 +23,7 @@ const BankIdHistoryList = () => {
     setVcs({ ...dids, content: [] });
     setVcHistories({ ...vcHistories, content: [] });
 
-    axios.get('http://localhost:8081/did/admin/myinfo/query/did', {
+    axios.get('did/admin/myinfo/query/did', {
       params: {
         cusno: cusno.value
       }
@@ -35,7 +35,7 @@ const BankIdHistoryList = () => {
       });
   };
   const searchVcByDid = () => {
-    axios.get('http://localhost:8081/did/admin/myinfo/query/vc')
+    axios.get('/did/admin/myinfo/query/vc')
       .then((Response) => {
         setVcs({ ...vcs, content: Response.data.content });
       }).catch((Error) => {
@@ -44,7 +44,7 @@ const BankIdHistoryList = () => {
   };
 
   const searchVcHistoryByVcId = () => {
-    axios.get('http://localhost:8081/did/admin/myinfo/query/vc/history')
+    axios.get('/did/admin/myinfo/query/vc/history')
       .then((Response) => {
         setVcHistories({ ...vcHistories, content: Response.data.content });
       }).catch((Error) => {

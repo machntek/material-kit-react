@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { Box, Container, Typography } from '@material-ui/core';
 import { useState } from 'react';
-import axios from 'axios';
+import axios from '../utils/axiosUtil';
 import FldHistoryListToolbar from '../components/history/fld/FldHistoryListToolbar';
 import FldHistoryResults from '../components/history/fld/FldHistoryResults';
 
@@ -11,7 +11,7 @@ const FldHistoryList = () => {
   });
 
   const searchFldHistories = () => {
-    axios.get('http://localhost:8081/did/admin/myinfo/query/fld')
+    axios.get('/did/admin/myinfo/query/fld')
       .then((Response) => {
         console.log(Response);
         setFldHistories({ ...fldHistories, content: Response.data.content });
