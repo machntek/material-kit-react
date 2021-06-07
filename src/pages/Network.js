@@ -4,28 +4,51 @@ import {
   Container,
   Grid, Typography
 } from '@material-ui/core';
-import axios from 'axios';
 import NetworkStatus from 'src/components/network/NetworkStatus';
 import NetworkControll from 'src/components/network/NetworkControll';
+import { useEffect, useState } from 'react';
+import axios from '../utils/axiosUtil';
 
 const Network = () => {
-  const networkStatus = [{}, {}];
-
-  const handleNetworkStatus = () => {
-    networkStatus.forEach((value, index) => {
-      axios.get(`http://localhost:8081/did/admin/myinfo/fdid/health/${index + 1}`)
-        .then((Response) => {
-          networkStatus[index] = Response.data;
-        }).catch((Error) => {
-          console.log(Error);
-        });
-    });
+  const initStatus = {
+    connected: false,
+    activeSchedule: false,
+    retry: false
   };
-  handleNetworkStatus();
-  console.log(networkStatus);
+  const [networkStatus, setNetworkStatus] = useState([initStatus, initStatus]);
+  // const handleNetworkStatus = () => {
+  //   setNetworkStatus([networkStatus.map((value, index) => {
+  //     console.log(index, value);
+  //     let responseObject = {};
+  //     axios.get(`/did/admin/myinfo/fdid/health/${index + 1}`)
+  //       .then((Response) => {
+  //         console.log(Response.data);
+  //         responseObject = Response.data;
+  //       }).catch((Error) => {
+  //       console.log(Error);
+  //     });
+  //     return responseObject;
+  //   })]);
+  const handleNetworkStatus = () => {
+    console.log('rendering');
+    const responseStatus = networkStatus.map(async (value, index) => {
+      console.log(value);
+      const response = await axios.get(`/did/admin/myinfo/fdid/health/${index + 1}`);
+      console.log(response.data);
+      console.log(response.data);
+      console.log(response);
+      console.log('응답');
+      return response.data;
+    });
+    console.log('xxx');
+    console.log(responseStatus);
+    console.log('xxx');
+    setNetworkStatus(responseStatus);
+  };
+  useEffect(() => {
+    handleNetworkStatus();
+  }, []);
   console.log('aaa');
-  networkStatus.map((status) => console.log(status));
-  console.log('xyz');
   console.log(networkStatus);
   console.log('xxx');
 
@@ -68,7 +91,8 @@ const Network = () => {
             </Grid>
           </Box>
           {networkStatus.map((status) => {
-            console.log('000');
+            console.log('rendering init');
+            console.log(status);
             return (
               <Box
                 sx={{

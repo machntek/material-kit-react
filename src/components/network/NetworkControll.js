@@ -1,7 +1,7 @@
 import {
   Box,
   Card,
-  CardContent, Grid,
+  CardContent,
   Paper, Typography,
 } from '@material-ui/core';
 import React, { useState } from 'react';
@@ -65,15 +65,17 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const NetworkControll = ({ activeSchedule, connected, retry }) => {
+const NetworkControll = ({ networkStatus }) => {
   const [state, setState] = useState({
-    activeSchedule: true,
-    connected: true,
-    retry: true
+    activeSchedule: networkStatus.activeSchedule,
+    connected: networkStatus.connected,
+    retry: networkStatus.retry
   });
-  console.log(activeSchedule);
-  console.log(connected);
-  console.log(retry);
+  console.log(networkStatus.activeSchedule);
+  console.log(networkStatus.connected);
+  console.log(networkStatus.retry);
+  console.log(state);
+  console.log('end################');
   const classes = useStyles();
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -130,15 +132,13 @@ const NetworkControll = ({ activeSchedule, connected, retry }) => {
             >
               회선 체크 스케쥴링 :
             </Typography>
-            <Typography component="div">
-              <Grid component="label" container alignItems="center" spacing={1}>
-                <Grid item>Off</Grid>
-                <Grid item>
-                  <AntSwitch checked={state.activeSchedule} onChange={handleChange} name="activeSchedule" />
-                </Grid>
-                <Grid item>On</Grid>
-              </Grid>
-            </Typography>
+            <FormGroup>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Typography>Off</Typography>
+                <AntSwitch checked={networkStatus.activeSchedule} onChange={handleChange} name="activeSchedule" inputProps={{ 'aria-label': 'ant design' }} />
+                <Typography>On</Typography>
+              </Stack>
+            </FormGroup>
           </Box>
           <Typography
             color="textPrimary"
@@ -146,7 +146,7 @@ const NetworkControll = ({ activeSchedule, connected, retry }) => {
             variant="h4"
           >
             연결 상태 :
-            {state.connected === true ? '연결' : '중단'}
+            {networkStatus.connected === true ? '연결' : '중단'}
           </Typography>
           <Box
             sx={{
@@ -168,7 +168,7 @@ const NetworkControll = ({ activeSchedule, connected, retry }) => {
             <FormGroup>
               <Stack direction="row" spacing={1} alignItems="center">
                 <Typography>Off</Typography>
-                <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />
+                <AntSwitch checked={networkStatus.retry} onChange={handleChange} name="retry" inputProps={{ 'aria-label': 'ant design' }} />
                 <Typography>On</Typography>
               </Stack>
             </FormGroup>
@@ -180,9 +180,7 @@ const NetworkControll = ({ activeSchedule, connected, retry }) => {
 };
 
 NetworkControll.propTypes = {
-  activeSchedule: PropTypes.bool.isRequired,
-  connected: PropTypes.bool,
-  retry: PropTypes.bool
+  networkStatus: PropTypes.object
 };
 
 export default NetworkControll;
